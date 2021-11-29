@@ -11,17 +11,19 @@ if ( (isset($uri[2]) && $uri[2] != "questions") || !isset( $uri[3])) {
 switch ($_SERVER["REQUEST_METHOD"]){
     case "POST":
         $new_question = json_decode(file_get_contents('php://input'), TRUE);
-        $my_query = "INSERT INTO questions (asked) VALUES ('". $new_question["asked"] . "');";
+        $my_query = "INSERT INTO questions (asked) VALUES ('". $new_question["asked"] . "')";
         $con->query($my_query) or die($con->error);
         $question_id = $con->insert_id;
         foreach ($new_question["answered"] as $answer) {
             $my_query = "INSERT INTO responses (answered, respondents, question_id) VALUES ('" . $answer["response"] .
-             "','" . $answer["respondents"] . "'," . $question_id . ");";
+             "','" . $answer["respondents"] . "'," . $question_id . ")";
             $con->query($my_query) or die($con->error);
         }
         break;
     case "GET":
-        echo "GET request made";
+        $my_query = "SELECT id, asked FROM questions WHERE id = " . $uri[3] . "";
+        $result = $con->query($my_query) or die($con->error);
+        echo json_encode($result->fetch_assoc());
         break;
     default:
         echo "Unsupported so far\n";
