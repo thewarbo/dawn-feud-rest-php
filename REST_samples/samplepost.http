@@ -1,0 +1,19 @@
+POST http://localhost:8080/index.php/questions/whatever HTTP/1.1
+
+{
+    "asked": "Sample question",
+    "answered": [
+        {
+            "response": "Sample answer",
+            "respondents": 50
+        },
+        {
+            "response": "Another answer",
+            "respondents": 40
+        },
+        {
+            "response": "A third answer",
+            "respondents": 30
+        }
+    ]
+}
