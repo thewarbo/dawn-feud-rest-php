@@ -1,7 +1,7 @@
 <?php
 $uri = explode("/", $_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$con = new mysqli("db", "mariadb", "mariadb", "mariadb", 3306);
+$con = new mysqli("localhost", "user", "password", "questions", 9906);
 
 if ( (isset($uri[2]) && $uri[2] != "questions") || !isset( $uri[3])) {
     header("HTTP/1.1 404 Not Found");
